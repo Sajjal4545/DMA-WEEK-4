@@ -1,47 +1,44 @@
 package com.example.twoactivities;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int mCount;
+    private TextView mShowCount;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE= "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mShowCount = (TextView) findViewById(R.id.show_count);
     }
 
-    public void passageOne(View view) {
+    public void showToast(View view) {
+        Toast toast = Toast.makeText(this, R.string.toast_message,
+                Toast.LENGTH_SHORT);
+        toast.show();
         Log.d(LOG_TAG, "Button Clicked!");
         Intent intent = new Intent(this, SecondActivity.class);
-        String passage = this.getResources().getString(R.string.passage_one);
-        intent.putExtra(EXTRA_MESSAGE, passage);
+        String counter = mShowCount.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, counter);
         startActivity(intent);
+
     }
 
-    public void passageTwo(View view) {
-        Log.d(LOG_TAG, "Button Two Clicked!");
-        Intent intent = new Intent(this, SecondActivity.class);
-        String passage = this.getResources().getString(R.string.passage_two);
-        intent.putExtra(EXTRA_MESSAGE, passage);
-        startActivity(intent);
-    }
-
-    public void passageThree(View view) {
-        Log.d(LOG_TAG, "Button Third Clicked!");
-        Intent intent = new Intent(this, SecondActivity.class);
-        String passage = this.getResources().getString(R.string.passage_third);
-        intent.putExtra(EXTRA_MESSAGE, passage);
-        startActivity(intent);
+    public void countUp(View view) {
+        mCount++;
+        if(mShowCount != null)
+            mShowCount.setText(Integer.toString(mCount));
     }
 }

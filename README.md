@@ -1,1 +1,1 @@
-<img src="gif/TwoActivitiesChallenge.gif" width="400" />
+<img src="gif/TwoActivitiesHomework.gif" width="400" />
